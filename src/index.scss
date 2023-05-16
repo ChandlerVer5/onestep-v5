@@ -1,0 +1,39 @@
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 14px;
+  overflow: hidden;
+  font-family: system-ui, 'PingFang SC', 'Helvetica Neue', 'Microsoft Yahei',
+    sans-serif;
+  word-break: break-all;
+}
+
+
+
+.onestep-body {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+
+     .onestep-create-btn {
+        position: fixed;
+        top: 10px;
+        right: 16px;
+        z-index: 1;
+        }
+
+    .onestep-tabs {
+        width: 100%;
+        box-shadow: inset 0 -1px 0 rgb(100 121 143 / 12%);
+    }
+
+    .onestep-tab {
+        font-size: 14px;
+        min-width: 148px;
+        min-height: 48px;
+        flex-direction: row;
+    }
+}
