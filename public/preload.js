@@ -71,11 +71,11 @@ const context = {
   },
   runAppleScript: o => new Promise(((resolve, t) => {
     let s = ""; let i = "";
-    const r = require("child_process").spawn("osascript", ["-ss"], {
+    const cmd = require("child_process").spawn("osascript", ["-ss"], {
       detached: !0
     });
 
-    r.on("close", (o => {
+    cmd.on("close", (o => {
       if (0 === o)
         return resolve(i.trim());
       s = s.trim().replace(/^\d+:\d+: execution error:/, "").replace(/\(-?(\d+)\)\s*$/, "");
@@ -85,18 +85,17 @@ const context = {
     }
     ));
 
-    r.stderr.on("data", (o => {
+    cmd.stderr.on("data", (o => {
       s += o
     }
     ));
-    r.stdout.on("data", (o => {
+
+    cmd.stdout.on("data", (o => {
       i += o
-    }
-    ));
-    r.stdin.write(o)
-    r.stdin.end()
-  })
-  ),
+    }));
+    cmd.stdin.write(o)
+    cmd.stdin.end()
+  })),
   sleep: timeout => {
     const e = Date.now() + Number(timeout);
     for (; Date.now() < e;)
@@ -163,32 +162,33 @@ window.services = {
       width: 72
     }))
     return e.toDataURL()
-  }
-  ,
-  vmRunScript: (o, e) => {
-    o.trim() && (context.ENTER = Object.freeze(e),
-      window.utools.hideMainWindow(),
-      setTimeout((() => {
+  },
+  vmRunScript: (script, enterPay) => {
+    if (script.trim()) {
+      context.ENTER = Object.freeze(enterPay)
+      window.utools.hideMainWindow()
+      setTimeout(() => {
         try {
-          vm.runInContext(`(()=>{ ${o} })()`, context),
-            window.utools.outPlugin()
-        } catch (o) {
-          o.message ? (window.utools.showNotification("运行错误：" + o.message),
-            window.utools.outPlugin()) : "redirect" === o.name && window.utools.showMainWindow()
+          vm.runInContext(`(()=>{ ${script} })()`, context)
+          window.utools.outPlugin()
+        } catch (error) {
+          error.message ?
+            (window.utools.showNotification("运行错误：" + error.message),
+              window.utools.outPlugin())
+            : "redirect" === error.name && window.utools.showMainWindow()
         }
-      }
-      )))
+      })
+    }
+  },
+  saveFileToDownloadFolder: (filename, content) => {
+    const savePath = path.join(window.utools.getPath("downloads"), filename)
+    fs.writeFileSync(savePath, content, "utf-8")
+    window.utools.shellShowItemInFolder(savePath)
   }
   ,
-  saveFileToDownloadFolder: (o, e) => {
-    const t = path.join(window.utools.getPath("downloads"), o);
-    fs.writeFileSync(t, e, "utf-8"),
-      window.utools.shellShowItemInFolder(t)
-  }
-  ,
-  readAutoScriptContent: o => {
-    const e = path.join(__dirname, "autojs", o);
-    return fs.existsSync(e) ? fs.readFileSync(e).toString() : null
+  readAutoScriptContent: filename => {
+    const filepath = path.join(__dirname, "autojs", filename);
+    return fs.existsSync(filepath) ? fs.readFileSync(filepath).toString() : null
   }
   ,
   strSha256: o => crypto.createHash("sha256").update(o).digest("hex")

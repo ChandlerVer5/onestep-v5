@@ -1,0 +1,65 @@
+html,
+body {
+  margin: 0;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  user-select: none;
+  font-family: system-ui, 'PingFang SC', 'Helvetica Neue', 'Microsoft Yahei',
+    sans-serif;
+  word-break: break-all;
+}
+
+#root {
+    width: 100%;
+    height: 100%;
+}
+
+
+@media (prefers-color-scheme: light) {
+  body {
+    background-color: #ffffff;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  ::-webkit-scrollbar-track-piece {
+    background-color: #303133;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #666;
+    border-color: #303133;
+  }
+  ::-webkit-scrollbar-corner {
+    background-color: #303133;
+  }
+
+  body {
+    background-color: #303133;
+    color: white;
+    .feature-form {
+      background-color: #20262d;
+        .feature-cmd {
+          &-remove {
+            color: #777777;
+          }
+      }
+    }
+    .onestep-hubs {
+      .scriptshub-search {
+        border-color: #434e5b;
+      }
+      .hubs-item-sub {
+        color: #ababab !important;
+      }
+    }
+    .onestep-page {
+      .scripts-item-sub {
+        color: #ababab;
+      }
+      .scripts-item-sub > div::before {
+        background-color: #515151;
+      }
+    }
+  }
+}

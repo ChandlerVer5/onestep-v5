@@ -1,0 +1,30 @@
+.script-dialog-body {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9;
+
+  & > div {
+    &:first-child {
+      width: 63%;
+      height: 100%;
+    }
+    &:last-child {
+      width: 37%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .script-dialog-handle {
+    display: flex;
+    & > button {
+      border-radius: 0;
+      text-transform: none;
+    }
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "name": "automation",
+  "name": "automation_v5",
   "pluginName": "一步到位V5",
   "description": "自动化脚本 - 让繁琐的步骤一步到位",
   "author": "福州猿力信息科技有限公司&ChandlerVer5",
@@ -17,7 +17,23 @@
   },
   "features": [
     {
-      "code": "onestep-create",
+      "code": "setting",
+      "explain": "一步到位 - 脚本分享中心",
+      "cmds": [
+        "一步到位",
+        "脚本分享中心",
+        "自动化脚本"
+      ]
+    },
+    {
+      "code": "setting-1",
+      "explain": "一步到位 - 已下载的脚本",
+      "cmds": [
+        "已下载的脚本"
+      ]
+    },
+    {
+      "code": "setting-2",
       "explain": "一步到位 - 我创建的脚本",
       "cmds": [
         "我创建的脚本"

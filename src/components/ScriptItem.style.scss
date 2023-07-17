@@ -1,0 +1,17 @@
+.scripts-item-sub {
+    display: flex;
+    align-items: center;
+    color: #666;
+    img {
+        width: 14px;
+        filter: grayscale(1);
+        margin-right: 6px;
+    }
+    img:hover {
+        filter: none;
+    }
+
+    & > button {
+        margin-left: 10px;
+    }
+}
